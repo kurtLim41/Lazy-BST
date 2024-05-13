@@ -1,84 +1,76 @@
 #include "DataBaseSystem.h"
-#include <fstream>
-#include <string>
 
 DataBaseSystem::DataBaseSystem(){
-    studentTable = new LazyBST<Student>();
-    facultyTable = new LazyBST<Faculty>();
+    studentBST = new LazyBST<Student>();
+    facultyBST = new LazyBST<Faculty>();
 }
 
-DataBaseSystem::~DataBaseSystem(){
-    delete studentTable;
-    delete facultyTable;
-}
+// void DataBaseSystem::run() {
+//     int choice;
+//     bool running = true;
 
-void DataBaseSystem::runSystem(){
-    int option = -1;
-    //loops indefiently till exit is choosen 
-    while(true){
-        cout << "Menu options, enter number corresponding to choice" << endl;
-        cout << "1. Print all students and their information" << endl;
-        cout << "2. Print all faculty and their information" << endl;
-        cout << "3. Find and display student information given the student id" << endl;
-        cout << "4. Find and display faculty information given the faculty id" << endl;
-        cout << "5. Add a new student" << endl;
-        cout << "6. Delete a student given the id" << endl;
-        cout << "7. Add a new faculty member" << endl;
-        cout << "8. Delete a facutly member given the id" << endl;
-        cout << "9. Change a student's advisor given the student id and the new faculty id" << endl;
-        cout << "10. Remove an adivsee from a faculty member given the ids" << endl;
-        cout << "11. Exit program" << endl;
-        cout << "====================================" << endl;
-        
-        //get option from console 
-        cin >> option;
+//     while (running) {
+//         cout << "\nMenu:\n"
+//                   << "1. Print all students\n"
+//                   << "2. Print all faculty\n"
+//                   << "3. Find student by ID\n"
+//                   << "4. Find faculty by ID\n"
+//                   << "5. Add a new student\n"
+//                   << "6. Delete a student\n"
+//                   << "7. Add a new faculty\n"
+//                   << "8. Delete a faculty\n"
+//                   << "9. Change a student's advisor\n"
+//                   << "10. Remove an advisee from a faculty\n"
+//                   << "11. Exit\n"
+//                   << "Enter your choice: ";
+//         cin >> choice;
+//         if(cin.fail()) {
+//             cin.clear(); // Clears any error flags
+//             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discards the input buffer
+//         }
+//         switch (choice) {
+//             case 1: printAllStudents(); break;
+//             case 2: printAllFaculty(); break;
+//             case 3: findStudentById(); break;
+//             case 4: findFacultyById(); break;
+//             case 5: addStudent(); break;
+//             case 6: deleteStudent(); break;
+//             case 7: addFaculty(); break;
+//             case 8: deleteFaculty(); break;
+//             case 9: changeStudentAdvisor(); break;
+//             case 10: removeAdvisee(); break;
+//             case 11:
+//                 writeLog();
+//                 running = false;
+//                 break;
+//             default:
+//                 cout << "Invalid option, please try again.\n";
+//                 break;
+//         }
+//     }
+// }
 
-        // switch statement for all options 
-        switch(option){
-            case 1: printAllStudents(); break;
-            case 2:
-            case 3: 
-            case 4: 
-            case 5:
-            case 6: 
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11: exitProgram(); return;
-            default:
-                cout << "Invalid option, please pick an option displayed on menu" << endl;
-                break;
-        }
-    }
-}
+// void DataBaseSystem::printAllStudents() {
+//     studentBST->printTree();
+// }
 
-//option 1
-void DataBaseSystem::printAllStudents() {
-    studentTable->printTree();
-}
+// void DataBaseSystem::printAllFaculty() {
+//     facultyBST->printTree();
+// }
 
+// void DataBaseSystem::writeLog() {
+//     ofstream logFile("runLog.txt");
+//     if (logFile.is_open()) {
+//         logFile << "Students:\n";
+//         studentBST->printTreeToFile(logFile);
+//         logFile << "\nFaculty:\n";
+//         facultyBST->printTreeToFile(logFile);
+//         logFile.close();
+//         cout << "Log written successfully.\n";
+//     } else {
+//         cout << "Failed to open log file.\n";
+//     }
+// }
 
+// Implement other methods...
 
-
-
-
-
-//option 11
-void DataBaseSystem::exitProgram(){
-    ofstream fout ("runLog.txt");
-    if(!fout){
-        cerr << "Error, cant open output file" << endl;
-    }
-
-    //print students info
-    fout << "Students information" << endl;
-    studentTable->printTreeToFile(fout);
-    fout << endl;
-
-    //print faculty info 
-    fout << "Faculty information" << endl;
-    facultyTable->printTreeToFile(fout);
-
-    fout.close();
-}

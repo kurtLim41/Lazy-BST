@@ -70,6 +70,7 @@ class LazyBST{
         int getLeftDepth(T value);
         int getRightDepth(T value);
         void clearTree(TreeNode<T> *node);
+        bool get(const T& value, T& output);
 
     private:
         TreeNode<T> *root;
@@ -478,6 +479,22 @@ void LazyBST<T>::clearTree(TreeNode<T> *node){
 
     delete node;  // Delete the current node
     node = nullptr;  // Set the node pointer to nullptr to avoid dangling pointers
+}
+
+template <class T>
+bool LazyBST<T>::get(const T& value, T& output) {
+    TreeNode<T>* current = root;
+    while (current != nullptr) {
+        if (value == current->key) {
+            output = current->key;
+            return true;
+        } else if (value < current->key) {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+    }
+    return false;
 }
 
 
